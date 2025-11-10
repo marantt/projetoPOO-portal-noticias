@@ -7,6 +7,42 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-    <h1 th:text="'Thymeleaf funcionando!'"></h1>
+    <div class="admin-container">
+        <header>
+            <h1>Portal de Notícias - Administração</h1>
+            <button class="new-btn">+ Nova Notícia</button>
+        </header>
+
+        <section class="news-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="noticia : ${noticias}">
+                        <td th:text="${noticia.titulo}">Título da Notícia</td>
+                        <td th:text="${noticia.data}">01/01/2025</td>
+                        <td>
+                            <button class="edit-btn">Editar</button>
+                            <button class="delete-btn">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="news-form">
+            <h2>Criar / Editar Notícia</h2>
+            <form th:action="@{/admin/salvar}" method="post">
+                <input type="text" name="titulo" placeholder="Título" required>
+                <textarea name="conteudo" placeholder="Conteúdo da notícia..." required></textarea>
+                <button type="submit">Salvar</button>
+            </form>
+        </section>
+    </div>
 </body>
 </html>
