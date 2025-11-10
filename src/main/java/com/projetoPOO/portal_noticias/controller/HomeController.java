@@ -20,4 +20,9 @@ public class HomeController {
     public String admin() {
         return "admin";
     }
+
+    @GetMapping("/criarNoticia")
+    public String criarNoticia() {
+        return "criarNoticia";
+    }
 }

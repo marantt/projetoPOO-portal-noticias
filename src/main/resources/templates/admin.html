@@ -10,7 +10,7 @@
     <div class="admin-container">
         <header>
             <h1>Portal de Notícias - Administração</h1>
-            <button class="new-btn">+ Nova Notícia</button>
+            <button class="new-btn" th:onclick="'window.location.href=\'' + @{/criarNoticia} + '\'">+ Nova Notícia</button>
         </header>
 
         <section class="news-list">
@@ -33,15 +33,6 @@
                     </tr>
                 </tbody>
             </table>
-        </section>
-
-        <section class="news-form">
-            <h2>Criar / Editar Notícia</h2>
-            <form th:action="@{/admin/salvar}" method="post">
-                <input type="text" name="titulo" placeholder="Título" required>
-                <textarea name="conteudo" placeholder="Conteúdo da notícia..." required></textarea>
-                <button type="submit">Salvar</button>
-            </form>
         </section>
     </div>
 </body>
