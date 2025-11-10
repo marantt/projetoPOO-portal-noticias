@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal de Notícias</title>
+    
+    <link rel="stylesheet" th:href="@{/css/portal.css}">
+</head>
+<body>
+
+    <h1>ÚLTIMAS NOTÍCIAS</h1>
+    <hr>
+
+    <div th:each="noticia : ${noticias}">
+    
+        <div th:switch="${noticia.getTipoNoticia()}" class="noticia-container">
+        
+            <div th:case="'Texto'" class="noticia-padrao">
+                <h2 th:text="${noticia.titulo}">Título da Notícia</h2>
+                <small>Por: <span th:text="${noticia.autor.nome}">Autor</span></small>
+                <p th:text="${noticia.getConteudo()}">Conteudo da notícia...</p>
+                <small>Fonte: <span th:text="${noticia.getFonteMateria()}">Fonte</span></small>
+            </div>
+            
+            <div th:case="'Foto'" class="noticia-foto">
+                <h2 th:text="${noticia.titulo}">Título da Notícia</h2>
+                <small>Por: <span th:text="${noticia.autor.nome}">Autor</span></small>
+                <img th:src="${noticia.getUrlFoto()}" alt="Foto" width="400px">
+                <p th:text="${noticia.getConteudo()}">Conteudo da notícia...</p>
+            </div>
+            
+            <div th:case="'Video'" class="noticia-video">
+                <h2 th:text="${noticia.titulo}">Título da Notícia</h2>
+                <small>Por: <span th:text="${noticia.autor.nome}">Autor</span></small>
+                <video controls width="400px">
+                    <source th:src="${noticia.getUrlVideo()}" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+                <p th:text="${noticia.getConteudo()}">Conteudo da notícia...</p>
+            </div>
+            
+            <div th:case="'Urgente'" class="noticia-urgente">
+                <h2>URGENTE: <span th:text="${noticia.titulo}">Título</span></h2>
+                <small>Por: <span th:text="${noticia.autor.nome}">Autor</span></small>
+                <p th:text="${noticia.getConteudo()}">Conteudo da notícia...</p>
+            </div>
+        
+        </div> <hr>
+    </div> </body>
+</html>
