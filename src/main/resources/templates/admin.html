@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administrador</title>
+    <script th:src="@{/js/admin.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/admin.css}" />
+</head>
+<body>
+    <form th:action="@{/logout}" method="post" style="display:inline">
+                    <button type="submit" class="logout-btn">Sair</button>
+    </form>
+    <div class="admin-container">
+        <header>
+            <h1>Portal de Notícias - Administração</h1>
+            <a class="new-btn" th:href="@{/criarNoticia}">+ Nova Notícia</a>
+        </header>
+
+        <section class="news-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="noticia : ${noticias}">
+                        <td th:text="${noticia.titulo}">Título da Notícia</td>
+                        <td th:text="${noticia.dataPublicacao}">01/01/2025</td>
+                        <td>
+                            <button class="edit-btn">Editar</button>
+                            <button class="delete-btn">Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+</html>

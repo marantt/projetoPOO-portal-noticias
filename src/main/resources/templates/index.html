@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-    <h1 th:text="'Thymeleaf funcionando!'"></h1>
+    <form th:action="@{/login}" method="post" style="display:inline">
+                    <button type="submit" class="loginadm_btn">Login ADM</button>
+    </form>
 </body>
 </html>
