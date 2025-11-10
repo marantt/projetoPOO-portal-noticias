@@ -19,8 +19,12 @@ public class HomeController {
 
     @PostMapping("/login")
     public String loginPost() {
-        // Redireciona para /admin sem validação (fluxo não funcional solicitado)
         return "redirect:/admin";
+    }
+
+    @PostMapping("/logout")
+    public String logoutPost() {
+        return "redirect:/";
     }
 
     @GetMapping("/admin")

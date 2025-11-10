@@ -7,6 +7,9 @@
     <link rel="stylesheet" th:href="@{/css/admin.css}" />
 </head>
 <body>
+    <form th:action="@{/logout}" method="post" style="display:inline">
+                    <button type="submit" class="logout-btn">Sair</button>
+    </form>
     <div class="admin-container">
         <header>
             <h1>Portal de Notícias - Administração</h1>
