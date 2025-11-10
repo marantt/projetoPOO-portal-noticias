@@ -19,7 +19,7 @@ public abstract class Noticia {
     }
 
     // Método abstrato para gerar a exibição da notícia
-    public abstract String exibirNoticia();
+    public abstract String getTipoNoticia();
 
     // Getters
     public String getTitulo() {
@@ -37,5 +37,7 @@ public abstract class Noticia {
     public Autor getAutor() {
         return autor;
     }
+
+    
 
 }
