@@ -12,9 +12,7 @@
             <input type="text" name="titulo" placeholder="Título">
             <textarea name="conteudo" placeholder="Conteúdo..."></textarea>
             <button type="submit">Salvar</button>
-            <button type="button" th:onclick="'window.location.href=\'' + @{/admin} + '\'"'>
-                Cancelar
-            </button>
+            <a class="cancel-btn" th:href="@{/admin}">Cancelar</a>
         </form>
     </div>
 </body>

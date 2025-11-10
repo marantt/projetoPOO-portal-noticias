@@ -10,7 +10,7 @@
     <div class="admin-container">
         <header>
             <h1>Portal de Notícias - Administração</h1>
-            <button class="new-btn" th:onclick="'window.location.href=\'' + @{/criarNoticia} + '\'">+ Nova Notícia</button>
+            <a class="new-btn" th:href="@{/criarNoticia}">+ Nova Notícia</a>
         </header>
 
         <section class="news-list">
@@ -25,7 +25,7 @@
                 <tbody>
                     <tr th:each="noticia : ${noticias}">
                         <td th:text="${noticia.titulo}">Título da Notícia</td>
-                        <td th:text="${noticia.data}">01/01/2025</td>
+                        <td th:text="${noticia.dataPublicacao}">01/01/2025</td>
                         <td>
                             <button class="edit-btn">Editar</button>
                             <button class="delete-btn">Excluir</button>
