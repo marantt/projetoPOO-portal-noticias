@@ -16,8 +16,14 @@ public class NoticiaComVideo extends Noticia{
         return "Vídeo";
     }
 
+    // Getters
     public String getUrlVideo() {
         return urlVideo;
+    }
+
+    // Setters
+    public void setUrlVideo(String urlVideo) {
+        this.urlVideo = urlVideo;
     }
 
 }

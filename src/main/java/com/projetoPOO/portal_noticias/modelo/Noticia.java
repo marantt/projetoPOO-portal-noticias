@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 
 public abstract class Noticia {
 
-    // Atributos comuns a todas as notícias
+    // Atributos 
+    private int id;
     private String titulo;
     private String conteudo;
     private LocalDateTime dataPublicacao;
@@ -38,6 +39,30 @@ public abstract class Noticia {
         return autor;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
+    }
+
+    public void setDataPublicacao(LocalDateTime dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
     
 
 }

@@ -16,9 +16,14 @@ public class NoticiaTextoSimples extends Noticia {
         return "Texto";
     }
 
-    // Getter
+    // Getters
     public String getFonteMateria() {
         return fonteMateria;
+    }
+
+    // Setters
+    public void setFonteMateria(String fonteMateria) {
+        this.fonteMateria = fonteMateria;
     }
 
 }
