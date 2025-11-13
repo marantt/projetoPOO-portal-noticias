@@ -17,15 +17,15 @@ public class PortalService {
     private NoticiaDAO noticiaDAO;
 
     /**
-     * Busca notícias publicadas (usa NoticiaDAO). Em caso de erro de acesso ao banco,
-     * retorna lista vazia para não quebrar a camada web.
+     Busca notícias publicadas. Em caso de erro de acesso ao banco,
+     retorna lista vazia para não quebrar a camada web.
      */
     public List<Noticia> buscarNoticias() {
         try {
             // limite padrão para exibir no portal
             return noticiaDAO.listarPublicadas(10);
         } catch (SQLException e) {
-            // log mínimo no console (podemos integrar um logger depois)
+            // log mínimo no console
             System.out.println("Erro ao buscar noticias no PortalService: " + e.getMessage());
             return Collections.emptyList();
         }
