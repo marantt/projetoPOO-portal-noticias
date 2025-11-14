@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Notícia</title>
+    <link rel="stylesheet" th:href="@{/css/criarNoticia.css}">
+</head>
+<body>
+<div class="admin-container">
+    <h1>Editar Notícia</h1>
+    <form method="POST" th:action="@{'/noticia/' + ${noticia.id} + '/atualizar'}">
+        <input type="text" name="titulo" th:value="${noticia.titulo}" placeholder="Título" required>
+        <textarea name="conteudo" placeholder="Conteúdo..." required th:text="${noticia.conteudo}"></textarea>
+        <button type="submit">Salvar</button>
+        <a class="cancel-btn" th:href="@{/admin}">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

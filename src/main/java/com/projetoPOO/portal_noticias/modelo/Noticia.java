@@ -39,6 +39,10 @@ public abstract class Noticia {
         return autor;
     }
 
+    public String getFonteMateria() {
+        return "";
+    }
+
     public int getId() {
         return id;
     }

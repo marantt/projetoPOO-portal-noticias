@@ -151,6 +151,19 @@ public class NoticiaDAO {
         }
     }
 
+    // Atualizar título e conteúdo de uma notícia
+    public void atualizar(int id, String titulo, String conteudo) throws SQLException {
+        String sql = "UPDATE noticias SET titulo = ?, conteudo = ?, updated_at = now() WHERE id = ?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, titulo);
+            stmt.setString(2, conteudo);
+            stmt.setInt(3, id);
+            stmt.executeUpdate();
+        }
+    }
+
     // Auxiliar para construir objeto Noticia a partir do ResultSet
     private Noticia constroiNoticia(ResultSet rs) throws SQLException {
         String tipo = rs.getString("tipo_noticia");
@@ -180,7 +193,6 @@ public class NoticiaDAO {
         } else if ("Urgente".equals(tipo)) {
             noticia = new NoticiaUrgente(titulo, conteudo, autor);
         } else {
-            // fallback: texto simples
             noticia = new NoticiaTextoSimples(titulo, conteudo, autor, null);
         }
 
