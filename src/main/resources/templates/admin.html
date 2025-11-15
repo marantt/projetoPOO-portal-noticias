@@ -21,6 +21,8 @@
                 <thead>
                     <tr>
                         <th>Título</th>
+                        <th>Autor</th>
+                        <th>Fonte</th>
                         <th>Data</th>
                         <th>Ações</th>
                     </tr>
@@ -28,10 +30,14 @@
                 <tbody>
                     <tr th:each="noticia : ${noticias}">
                         <td th:text="${noticia.titulo}">Título da Notícia</td>
-                        <td th:text="${noticia.dataPublicacao}">01/01/2025</td>
+                        <td th:text="${noticia.autor != null ? noticia.autor.nome : '—'}">Autor</td>
+                        <td th:text="${noticia.fonteMateria != null ? noticia.fonteMateria : ''}">Fonte</td>
+                        <td th:text="${#temporals.format(noticia.dataPublicacao, 'dd/MM/yyyy HH:mm')}">01/01/2025</td>
                         <td>
-                            <button class="edit-btn">Editar</button>
-                            <button class="delete-btn">Excluir</button>
+                            <a class="edit-btn" th:href="@{'/noticia/' + ${noticia.id} + '/editar'}">Editar</a>
+                            <form th:action="@{'/noticia/' + ${noticia.id} + '/deletar'}" method="post" style="display:inline">
+                                <button type="submit" class="delete-btn" onclick="return confirm('Confirmar exclusão?')">Excluir</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>

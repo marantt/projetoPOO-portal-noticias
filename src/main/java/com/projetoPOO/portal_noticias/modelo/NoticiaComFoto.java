@@ -16,9 +16,16 @@ public class NoticiaComFoto extends Noticia{
         return "Foto";
     }
 
-    // Getter
+    // Getters
     public String getUrlFoto() {
         return urlFoto;
     }
+
+    // Setters
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
+    }
+
+    
 
 }
