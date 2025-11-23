@@ -3,46 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Administrador</title>
+
     <script th:src="@{/js/admin.js}"></script>
     <link rel="stylesheet" th:href="@{/css/admin.css}" />
 </head>
 <body>
+
     <form th:action="@{/logout}" method="post" style="display:inline">
-                    <button type="submit" class="logout-btn">Sair</button>
+        <button type="submit" class="logout-btn">Sair</button>
     </form>
+
     <div class="admin-container">
+
         <header>
             <h1>Portal de Notícias - Administração</h1>
-            <a class="new-btn" th:href="@{/criarNoticia}">+ Nova Notícia</a>
+
+            <div class="menu">
+                <button onclick="abrirNoticias()">Gerenciar Notícias</button>
+                <button onclick="abrirUsuarios()">Gerenciar Usuários</button>
+            </div>
         </header>
 
-        <section class="news-list">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Título</th>
-                        <th>Autor</th>
-                        <th>Fonte</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="noticia : ${noticias}">
-                        <td th:text="${noticia.titulo}">Título da Notícia</td>
-                        <td th:text="${noticia.autor != null ? noticia.autor.nome : '—'}">Autor</td>
-                        <td th:text="${noticia.fonteMateria != null ? noticia.fonteMateria : ''}">Fonte</td>
-                        <td th:text="${#temporals.format(noticia.dataPublicacao, 'dd/MM/yyyy HH:mm')}">01/01/2025</td>
-                        <td>
-                            <a class="edit-btn" th:href="@{'/noticia/' + ${noticia.id} + '/editar'}">Editar</a>
-                            <form th:action="@{'/noticia/' + ${noticia.id} + '/deletar'}" method="post" style="display:inline">
-                                <button type="submit" class="delete-btn" onclick="return confirm('Confirmar exclusão?')">Excluir</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <div id="conteudo">
+            <!-- Sessão de Gerenciamento de Notícias -->
+            <section class="news-list">
+                <a class="new-btn" th:href="@{/criarNoticia}">+ Nova Notícia</a>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Fonte</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="noticia : ${noticias}">
+                            <td th:text="${noticia.titulo}">Título</td>
+                            <td th:text="${noticia.autor != null ? noticia.autor.nome : '—'}">Autor</td>
+                            <td th:text="${noticia.fonteMateria}">Fonte</td>
+                            <td th:text="${#temporals.format(noticia.dataPublicacao, 'dd/MM/yyyy HH:mm')}">01/01/2025</td>
+                            <td>
+                                <a class="edit-btn" th:href="@{'/noticia/' + ${noticia.id} + '/editar'}">Editar</a>
+                                <form th:action="@{'/noticia/' + ${noticia.id} + '/deletar'}" method="post" style="display:inline">
+                                    <button type="submit" class="delete-btn" onclick="return confirm('Confirmar exclusão?')">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+
+            <!--Sessão de Gerenciamento Usuário-->
+            <section id="listaUsuarios" class="user-list" style="display:none;">
+
+                <a class="new-btn" th:href="@{/criarUsuario}">+ Novo Usuário</a>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Ativo</th>
+                            <th>Criado em</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="user : ${usuarios}">
+                            <td th:text="${user.username}">username</td>
+                            <td th:text="${user.ativo ? 'Sim' : 'Não'}">Sim</td>
+                            <td th:text="${#temporals.format(user.createdAt, 'dd/MM/yyyy HH:mm')}">01/01/2025</td>
+
+                            <td>
+                                <form th:action="@{/resetSenha}" method="post">
+                                    <input type="hidden" name="username" th:value="${user.username}">
+                                    <input type="password" name="newPassword" placeholder="Nova Senha">
+                                    <button type="submit" class="edit-btn">Resetar Senha</button>
+                                </form>
+
+                                <form th:action="@{'/usuario/' + ${user.id} + '/deletar'}"
+                                      method="post" style="display:inline;">
+                                    <button type="submit" class="delete-btn"
+                                            onclick="return confirm('Excluir este usuário?')">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </section>
+        </div>
     </div>
 </body>
 </html>
