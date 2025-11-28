@@ -13,18 +13,20 @@ public class NoticiasController {
     @Autowired
     private NoticiaDAO noticiaDAO;
 
+
     @PostMapping("/salvarNoticia")
     public String salvar(@RequestParam("titulo") String titulo,
                          @RequestParam("conteudo") String conteudo,
                          @RequestParam(value = "tipo", defaultValue = "Texto") String tipo,
-                         @RequestParam(value = "fonte", required = false) String fonte,
+                         @RequestParam("autorId") int autorId,
                          @RequestParam(value = "url_foto", required = false) String urlFoto,
                          @RequestParam(value = "url_video", required = false) String urlVideo,
+                         @RequestParam(value = "fonte", required = false) String fonte,
                          RedirectAttributes r) {
 
         try {
             Autor autor = new Autor();
-            autor.setId(1);
+            autor.setId(autorId);
 
             if (tipo.equalsIgnoreCase("Foto")) {
                 var n = new NoticiaComFoto(titulo, conteudo, autor, urlFoto);
@@ -41,7 +43,7 @@ public class NoticiasController {
                         conteudo,
                         autor,
                         (fonte != null && !fonte.isEmpty()) ? fonte : "Portal"
-                );
+            );
                 noticiaDAO.inserirNoticiaTextoSimples(n);
             }
 
@@ -49,6 +51,7 @@ public class NoticiasController {
             return "redirect:/admin";
 
         } catch (SQLException e) {
+            e.printStackTrace();
             r.addFlashAttribute("erro", "Erro ao salvar notícia.");
             return "redirect:/criarNoticia";
         }
@@ -78,4 +81,6 @@ public class NoticiasController {
         }
         return "redirect:/admin";
     }
+
+
 }

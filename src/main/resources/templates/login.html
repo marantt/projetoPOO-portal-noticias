@@ -10,10 +10,10 @@
     <div class="login-container">
         <h2>Login ADM
         </h2>
-        <form th:action="@{/logon}" method="post">
+        <form th:action="@{/admin}" method="post">
             <input type="text" name="username" placeholder="Usuário">
             <input type="password" name="password" placeholder="Senha" >
-            <button type="submit">Entrar</button>
+            <button type="submit" onclick="">Entrar</button>
         </form>
         <div class="login-links">
             <a th:href="@{/resetSenha}">Resetar senha</a>

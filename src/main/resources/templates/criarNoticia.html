@@ -21,7 +21,14 @@
 
             <textarea name="conteudo" placeholder="Conteúdo..." required></textarea>
 
-            <input type="text" name="fonte" placeholder="Fonte (opcional)">
+            <label for="autorId">Autor:</label>
+            <select name="autorId" id="autorId" required>
+                <option value="">Selecione um autor</option>
+                <th:block th:each="a : ${autores}">
+                    <option th:value="${a.id}" th:text="${a.nome}"></option>
+                </th:block>
+            </select>
+            <input type="text" name="fonte" placeholder="Fonte da matéria (opcional)">
             <input type="text" name="url_foto" placeholder="URL da foto (se Tipo=Foto)">
             <input type="text" name="url_video" placeholder="URL do vídeo (se Tipo=Vídeo)">
 
