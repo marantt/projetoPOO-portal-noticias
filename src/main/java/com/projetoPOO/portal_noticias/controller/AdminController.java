@@ -2,6 +2,9 @@ package com.projetoPOO.portal_noticias.controller;
 
 import com.projetoPOO.portal_noticias.modelo.UsuarioAdmin;
 import com.projetoPOO.portal_noticias.modelo.UsuarioAdminDAO;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +15,11 @@ import java.sql.SQLException;
 @Controller
 public class AdminController {
 
+    // Não utilizamos 
     @Autowired
     private UsuarioAdminDAO usuarioAdminDAO;
 
+    // Não utilizamos 
     @PostMapping("/criarUsuario")
     public String criarUsuario(@RequestParam("username") String username,
                                @RequestParam("password") String password,
@@ -30,6 +35,7 @@ public class AdminController {
         }
     }
 
+    // Não utilizamos 
     @PostMapping("/resetSenha")
     public String resetSenha(@RequestParam("username") String username,
                              @RequestParam("newPassword") String novaSenha,
@@ -51,12 +57,32 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public String loginPost() {
+    public String loginPost(HttpSession session,
+                            @RequestParam String username,
+                            @RequestParam String password) {
+
+        session.setAttribute("logado", true);
+
         return "redirect:/admin";
     }
 
     @PostMapping("/logout")
-    public String logoutPost() {
-        return "redirect:/login";
+    public String logoutPost(HttpSession session) {
+
+        session.setAttribute("logado", false);
+
+        return "redirect:/index";
+    }
+
+    @PostMapping("/admin")
+    public String adminPost(HttpSession session) {
+
+        Boolean logado = (Boolean) session.getAttribute("logado");
+
+        if (logado == null || !logado) {
+            return "redirect:/login";
+        }
+
+        return "redirect:/admin";
     }
 }

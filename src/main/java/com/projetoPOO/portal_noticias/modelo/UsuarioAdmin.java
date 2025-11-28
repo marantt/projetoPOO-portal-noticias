@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 
 /* Coisas relacionadas a senha e hash pedi ajuda a IA, espero que esteja funcionando! */
-
+// Acabou que nem conseguimos terminar :c
 public class UsuarioAdmin {
 
     private String username;

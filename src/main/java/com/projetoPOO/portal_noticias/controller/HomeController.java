@@ -2,6 +2,7 @@ package com.projetoPOO.portal_noticias.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ui.Model;
 import java.sql.SQLException;
 import java.util.List;
@@ -22,7 +23,7 @@ public class HomeController {
     private AutorDAO autorDAO;
 
 
-    @GetMapping("/")
+    @GetMapping({"/", "/index"})
     public String home(Model model) {
     try {
         model.addAttribute("noticias", noticiaDAO.listarTodas());
@@ -30,7 +31,8 @@ public class HomeController {
         model.addAttribute("noticias", java.util.Collections.emptyList());
     }
     return "index";
-}
+    }
+
 
 
     @GetMapping("/login")
@@ -40,24 +42,29 @@ public class HomeController {
 
     @GetMapping("/criarUsuario")
     public String criarUsuarioForm() {
-        return "criarUsuario";
+        return "admin";
     }
 
     @GetMapping("/resetSenha")
     public String resetSenhaForm() {
-        return "resetSenha";
+        return "login";
     }
 
     @GetMapping("/admin")
     public String admin(HttpSession session, Model model) {
+
+        Boolean logado = (Boolean) session.getAttribute("logado");
+
+        if (logado == null || !logado) {
+            return "redirect:/login";
+        }
+
         try {
-            List<com.projetoPOO.portal_noticias.modelo.Noticia> noticias = noticiaDAO.listarTodas();
-            model.addAttribute("noticias", noticias);
+            model.addAttribute("noticias", noticiaDAO.listarTodas());
         } catch (SQLException e) {
             model.addAttribute("noticias", java.util.Collections.emptyList());
         }
-
-        return "admin"; 
+        return "admin";
     }
 
     @GetMapping("/criarNoticia")
@@ -72,7 +79,7 @@ public class HomeController {
     }
 
     @GetMapping("/noticia/{id}/editar")
-    public String editarNoticia(int id, Model model) {
+    public String editarNoticia(@PathVariable("id") int id, Model model) {
         try {
             var noticia = noticiaDAO.buscarPorId(id);
             model.addAttribute("noticia", noticia);
@@ -81,4 +88,5 @@ public class HomeController {
         }
         return "editarNoticia";
     }
+
 }
